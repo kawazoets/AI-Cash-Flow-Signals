@@ -46,7 +46,6 @@ Initial observation targets include:
 Financial markets that determine whether external funding remains available.
 
 Examples include:
-
 - Corporate Bond Issuance
 - Treasury Yield
 - SOFR
