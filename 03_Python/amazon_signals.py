@@ -1,0 +1,31 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+from pathlib import Path
+
+DATA_FILE = Path("02_Data/amazon_quarterly.csv")
+CHART_DIR = Path("04_Charts")
+CHART_DIR.mkdir(parents=True, exist_ok=True)
+df = pd.read_csv(DATA_FILE)
+
+plt.figure(figsize=(11, 6))
+plt.plot(df["calendar_quarter"], df["operating_cash_flow_usd_m"], marker="o", label="Operating Cash Flow")
+plt.plot(df["calendar_quarter"], df["cash_capex_net_usd_m"], marker="o", label="Cash CAPEX (net)")
+plt.title("Amazon: Operating Cash Flow vs Cash CAPEX")
+plt.xlabel("Calendar Quarter"); plt.ylabel("USD million")
+plt.xticks(rotation=45, ha="right"); plt.legend(); plt.tight_layout()
+plt.savefig(CHART_DIR / "amazon_ocf_vs_capex.png", dpi=180); plt.close()
+
+plt.figure(figsize=(11, 6))
+plt.plot(df["calendar_quarter"], df["capex_to_ocf_pct"], marker="o")
+plt.axhline(100, linestyle="--", linewidth=1)
+plt.title("Amazon: Cash CAPEX as % of Operating Cash Flow")
+plt.xlabel("Calendar Quarter"); plt.ylabel("Percent")
+plt.xticks(rotation=45, ha="right"); plt.tight_layout()
+plt.savefig(CHART_DIR / "amazon_capex_to_ocf.png", dpi=180); plt.close()
+
+plt.figure(figsize=(11, 6))
+plt.plot(df["calendar_quarter"], df["cash_plus_marketable_securities_usd_m"], marker="o", label="Cash + Marketable Securities")
+plt.title("Amazon: Liquidity")
+plt.xlabel("Calendar Quarter"); plt.ylabel("USD million")
+plt.xticks(rotation=45, ha="right"); plt.legend(); plt.tight_layout()
+plt.savefig(CHART_DIR / "amazon_liquidity.png", dpi=180); plt.close()
